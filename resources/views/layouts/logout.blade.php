@@ -7,18 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bulletin_Board</title>
   <!-- CSS -->
+  <!-- <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet"> -->
 </head>
 
 <body>
   <div class="logout_container">
-  <!-- タイトル -->
-  <header>
-    @yield('title')
-  </header>
-  <!-- 中身 -->
-  <div>
-    @yield('content')
-  </div>
+    <!-- タイトル -->
+    <header>
+      @yield('title')
+    </header>
+    <!-- 中身 -->
+    <div class="register_container">
+      @yield('content')
+    </div>
   </div>
 
   <script src="JavaScriptファイルのURL"></script>

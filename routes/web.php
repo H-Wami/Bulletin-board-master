@@ -27,11 +27,16 @@ Route::namespace('Auth\Login')->group(function(){
     Route::get('/logout', 'LoginController@logout')->name('logout');
 });
 
-    // Auth\Registerのまとまり
-    Route::namespace('Auth\Register')->group(function (){
-        // ユーザー登録ページ表示
-        Route::get('/register', 'RegisterController@registerView')->name('registerView');
-    });
+// Auth\Registerのまとまり
+Route::namespace('Auth\Register')->group(function (){
+    // ユーザー登録ページ表示
+    Route::get('/register', 'RegisterController@registerView')->name('registerView');
+    // ユーザー登録機能
+    Route::post('/register/user', 'RegisterController@register')->name('register');
+});
+
+// ユーザー登録確認ページ表示
+Route::get('/added', 'Auth\Register\RegisterAddedController@added')->name('added');
 
 // ログイン中のページ(ミドルウェアでログアウト中に表示させようとするとログインページに飛ぶ)
 Route::group(['middleware' => ['auth']], function () {
