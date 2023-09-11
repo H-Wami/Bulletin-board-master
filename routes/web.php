@@ -16,25 +16,29 @@
 //     return view('welcome');
 // });
 
-// ログアウト中のページ
-Route::group(['middleware' => ['guest']], function(){
-    // Auth\Loginのまとまり
-    Route::namespace('Auth\Login')->group(function(){
-        // ログインページ表示
-        Route::get('/login', 'LoginController@loginView')->name('loginView');
+// Auth\Loginのまとまり
+Route::namespace('Auth\Login')->group(function(){
+    // ログインページ表示
+    Route::get('/login', 'LoginController@loginView')->name('login');
+    // ログイン機能
+    Route::post('/login/user', 'LoginController@login')->name('loginUser');
 
-        // ログイン機能
-        Route::post('/login/user', 'LoginController@login')->name('login');
-    });
+    // ログアウト機能
+    Route::get('/logout', 'LoginController@logout')->name('logout');
+});
 
     // Auth\Registerのまとまり
     Route::namespace('Auth\Register')->group(function (){
         // ユーザー登録ページ表示
-        Route::get('/register', 'Auth\Register\RegisterController@registerView')->name('registerView');
+        Route::get('/register', 'RegisterController@registerView')->name('registerView');
     });
+
+// ログイン中のページ(ミドルウェアでログアウト中に表示させようとするとログインページに飛ぶ)
+Route::group(['middleware' => ['auth']], function () {
+    // User\Postのまとまり
+    Route::namespace('User\Post')->group(function () {
+        // 投稿一覧ページ表示
+        Route::get('/post', 'PostsController@postView')->name('postView');
+    });
+
 });
-
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

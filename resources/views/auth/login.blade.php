@@ -8,7 +8,7 @@
 
 @section('content')
 
-<form action="{{ route('login') }}" method="POST">
+<form action="{{ route('loginUser') }}" method="POST">
     {{ csrf_field() }} <!-- CSRF対策 -->
     <label>メールアドレス</label>
     <input type="text" name="email">
