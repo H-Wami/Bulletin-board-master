@@ -44,6 +44,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::namespace('User\Post')->group(function () {
         // 投稿一覧ページ表示
         Route::get('/post', 'PostsController@postView')->name('postView');
+        // 新規投稿ページ表示
+        Route::get('/post/input', 'PostsController@postInput')->name('postInput');
     });
 
+    // Admin\Postのまとまり
+    Route::namespace('Admin\Post')->group(function () {
+        // カテゴリー追加ページ表示
+        Route::get('/category', 'PostsController@categoryView')->name('categoryView');
+    });
 });

@@ -8,4 +8,9 @@
 
 @section('content')
 
+<!-- もしログインユーザーが管理者だったら -->
+<a href="{{ route('categoryView') }}">カテゴリーを追加</a>
+
+<a href="{{ route('postInput') }}">投稿</a>
+
 @endsection

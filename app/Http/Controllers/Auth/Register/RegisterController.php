@@ -11,11 +11,6 @@ use DB;
 class RegisterController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
     // ユーザー登録ページ表示
     public function registerView()
     {

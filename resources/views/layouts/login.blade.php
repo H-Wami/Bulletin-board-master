@@ -7,12 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bulletin_Board</title>
   <!-- CSS -->
+  <!-- <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet"> -->
 </head>
 
 <body>
   <div class="login_container">
     <!-- タイトル -->
-    <header>
+    <header class="login_header">
       @yield('title')
       <a href="{{ route('logout') }}">ログアウト</a>
     </header>

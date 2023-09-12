@@ -8,12 +8,6 @@ use Auth;
 
 class LoginController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
     // ログイン画面表示
     public function loginView()
     {

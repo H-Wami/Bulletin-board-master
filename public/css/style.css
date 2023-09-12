@@ -6,7 +6,6 @@
   padding: 0;
 }
 
-.register_container{
+.login_header{
   display: flex;
-  flex-flow: column;
 }

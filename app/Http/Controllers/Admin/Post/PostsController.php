@@ -7,5 +7,9 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    //
+    // カテゴリー追加ページ表示
+    public function categoryView()
+    {
+        return view('category');
+    }
 }
