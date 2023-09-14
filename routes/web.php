@@ -54,5 +54,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::namespace('Admin\Post')->group(function () {
         // カテゴリー追加ページ表示
         Route::get('/category', 'PostsController@categoryView')->name('categoryView');
+        // メインカテゴリー作成機能
+        Route::post('/main_category/create', 'PostMainCategoriesController@mainCategoryCreate')->name('mainCategoryCreate');
+        // メインカテゴリー削除機能
+        Route::get('/main_category/delete/{id}', 'PostMainCategoriesController@mainCategoryDelete')->name('mainCategoryDelete');
+        // サブカテゴリー作成機能
+        Route::post('/sub_category/create', 'PostSubCategoriesController@subCategoryCreate')->name('subCategoryCreate');
+        // サブカテゴリー削除機能
+        Route::get('/sub_category/delete/{id}', 'PostSubCategoriesController@subCategoryDelete')->name('subCategoryDelete');
     });
 });

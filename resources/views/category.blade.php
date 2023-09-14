@@ -19,16 +19,16 @@
 </div>
 @endif
 
-<!-- メインカテゴリー追加 -->
-<form method="POST">
+<!-- メインカテゴリー作成 -->
+<form action="{{ route('mainCategoryCreate') }}" method="POST">
   {{ csrf_field() }}<!-- CSRF対策 -->
   <label>新規メインカテゴリー</label>
   <input type="text" name="main_category" value="{{ old('main_category') }}">
   <input type="submit" value="登録">
 </form>
 
-<!-- サブカテゴリー追加 -->
-<form method="POST">
+<!-- サブカテゴリー作成 -->
+<form action="{{ route('subCategoryCreate') }}" method="POST">
   {{ csrf_field() }}<!-- CSRF対策 -->
   <!-- メインカテゴリー選択 -->
   <label>メインカテゴリー</label>
@@ -52,14 +52,22 @@
   @foreach($main_categories as $main_category)
   <li category_id="{{ $main_category->id }}"></li>
   <span>{{ $main_category->main_category }}</span>
-  <!-- 対象のサブカテゴリーがなければ削除ボタン表示 -->
-  <a>削除</a>
+  <!-- メインカテゴリーの中にサブカテゴリーがなければ削除ボタン表示
+  post_main_categoriesテーブルのidカラムの値が
+  post_sub_categoriesテーブルのpost_main_category_idカラムの値に存在しない時削除ボタンを表示-->
+  @if(empty($main_category->postSubCategories->first()))
+  <a href="{{ route('mainCategoryDelete',['id' => $main_category->id]) }}" onclick="return confirm('メインカテゴリーを削除してもよろしいでしょうか？')">削除</a>
+  @endif
   <!-- サブカテゴリー表示 -->
   <!-- メインカテゴリーに紐付いているサブカテゴリーを持ってくる $紐付いている元->リレーションメソッド -->
   @foreach($main_category->postSubCategories as $sub_category)
   <span>{{ $sub_category->sub_category }}</span>
-  <!-- 対象のサブカテゴリーの投稿がなければ削除ボタン表示 -->
-  <a>削除</a>
+  <!-- もし対象のサブカテゴリーの投稿(リレーション先postsメソッド)を取得し、その値がなければ削除ボタン表示
+  post_sub_categoriesテーブルのidカラムの値が
+  postsテーブルのpost_sub_category_idカラムの値に存在しない時削除ボタンを表示 -->
+  @if(empty($sub_category->posts->first()))
+  <a href="{{ route('subCategoryDelete',['id' => $sub_category->id]) }}" onclick="return confirm('サブカテゴリーを削除してもよろしいでしょうか？')">削除</a>
+  @endif
   @endforeach <!-- サブカテゴリーのend -->
   </li>
   @endforeach <!-- メインカテゴリーのend -->

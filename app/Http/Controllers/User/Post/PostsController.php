@@ -41,6 +41,6 @@ class PostsController extends Controller
             'event_at' => now()
         ]);
 
-        return redirect()->route('postView',compact($post));
+        return redirect()->route('postView',compact('post'));
     }
 }
