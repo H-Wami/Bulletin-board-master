@@ -16,13 +16,18 @@
     <p>{{ $post->event_at->format('Y年m月d日') }}</p>
     <!-- 閲覧数 -->
   </div>
-  <!-- 投稿タイトル -->
+  <!-- 2段目コンテンツまとめ -->
   <div class="">
-    <p>{{ $post->title }}</p>
-  </div>
-  <!-- もしログインユーザーならば編集ボタンを表示する -->
-  <div>
-    <a>編集</a>
+    <!-- 投稿タイトル -->
+    <div class="">
+      <p>{{ $post->title }}</p>
+    </div>
+    <!-- もしログインユーザーならば編集ボタンを表示する -->
+    @if($post->user_id === Auth::user()->id)
+    <div>
+      <a class="post_edit_btn" href="{{ route('postEdit', ['id' => $post->id]) }}">編集</a>
+    </div>
+    @endif
   </div>
   <!-- 投稿内容 -->
   <div>

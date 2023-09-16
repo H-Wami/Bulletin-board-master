@@ -51,6 +51,10 @@ Route::group(['middleware' => ['auth']], function () {
         // 投稿詳細ページ表示
         Route::get('/post/detail/{id}', 'PostsController@postDetail')->name('postDetail');
         // 投稿編集ページ表示
+        Route::get('/post/edit/{id}', 'PostsController@postEdit')->name('postEdit');
+        // 投稿編集機能
+
+        // 投稿削除機能
     });
 
     // Admin\Postのまとまり

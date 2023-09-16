@@ -33,7 +33,7 @@
 
 <!-- 右側 -->
 <div class="">
-  <!-- もしログインユーザーが管理者だったら -->
+  <!-- もしログインユーザーが管理者だったらボタン表示 -->
   @if(Auth::user()->admin_role === 1)
   <a href="{{ route('categoryView') }}">カテゴリーを追加</a>
   @endif

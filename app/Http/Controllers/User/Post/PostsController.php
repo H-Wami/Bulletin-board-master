@@ -50,4 +50,17 @@ class PostsController extends Controller
         $post = Post::with('user')->findOrFail($post_id); // Postモデルと関連するusersを取得->$post_idの投稿を取得
         return view('post.post_detail', compact('post'));
     }
+
+    // 投稿編集ページ表示
+    public function postEdit($post_id)
+    {
+        $post = Post::with('user')->findOrFail($post_id); // Postモデルと関連するusersを取得->$post_idの投稿を取得
+        $main_categories = PostMainCategory::get(); // メインカテゴリー取得
+        $sub_categories = PostSubCategory::get(); // サブカテゴリー取得
+        return view('post.post_edit', compact('post', 'main_categories', 'sub_categories'));
+    }
+
+    // 投稿編集機能
+
+    // 投稿削除機能
 }
