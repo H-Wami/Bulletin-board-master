@@ -18,8 +18,8 @@ class PostsController extends Controller
     // 投稿一覧ページ表示
     public function postView()
     {
-        $id = Auth::id();
-        return view('post.post', ['id' => $id]);
+        $posts = Post::with('user')->latest()->get(); // Postモデルと関連するusersを取得->新しい順に全て取得
+        return view('post.post',compact('posts'));
     }
 
     // 新規投稿ページ表示
@@ -42,5 +42,12 @@ class PostsController extends Controller
         ]);
 
         return redirect()->route('postView',compact('post'));
+    }
+
+    // 投稿詳細ページ表示
+    public function postDetail($post_id)
+    {
+        $post = Post::with('user')->findOrFail($post_id); // Postモデルと関連するusersを取得->$post_idの投稿を取得
+        return view('post.post_detail', compact('post'));
     }
 }

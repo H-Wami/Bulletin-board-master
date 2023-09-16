@@ -16,6 +16,7 @@
     <!-- タイトル -->
     <header class="login_header">
       @yield('title')
+      <a href="{{ route('postView') }}">投稿一覧</a>
       <a href="{{ route('logout') }}">ログアウト</a>
     </header>
     <!-- 中身 -->

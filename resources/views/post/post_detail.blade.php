@@ -2,15 +2,13 @@
 
 @section('title')
 
-<h2>掲示板投稿一覧</h2>
+<h2>投稿詳細画面</h2>
 
 @endsection
 
 @section('content')
-<!-- 左側:投稿一覧 -->
+<!-- 投稿詳細 -->
 <div class="">
-  @foreach($posts as $post)
-  <!-- 投稿ひとまとめ -->
   <!-- 上端コンテンツまとめ -->
   <div class="">
     <!-- postsテーブルの値->リレーションメソッド->リレーションテーブルの値取得->取得したいカラム名 -->
@@ -20,7 +18,15 @@
   </div>
   <!-- 投稿タイトル -->
   <div class="">
-    <a href="{{ route('postDetail',['id' => $post->id]) }}">{{ $post->title }}</a>
+    <p>{{ $post->title }}</p>
+  </div>
+  <!-- もしログインユーザーならば編集ボタンを表示する -->
+  <div>
+    <a>編集</a>
+  </div>
+  <!-- 投稿内容 -->
+  <div>
+    <p>{{ $post->post }}</p>
   </div>
   <!-- 下端コンテンツまとめ -->
   <div>
@@ -28,16 +34,5 @@
     <!-- コメント数 -->
     <!-- いいね -->
   </div>
-  @endforeach
-</div>
-
-<!-- 右側 -->
-<div class="">
-  <!-- もしログインユーザーが管理者だったら -->
-  @if(Auth::user()->admin_role === 1)
-  <a href="{{ route('categoryView') }}">カテゴリーを追加</a>
-  @endif
-
-  <a href="{{ route('postInput') }}">投稿</a>
 </div>
 @endsection

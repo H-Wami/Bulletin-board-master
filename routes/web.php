@@ -48,6 +48,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/post/input', 'PostsController@postInput')->name('postInput');
         // 新規投稿機能
         Route::post('/post/create', 'PostsController@postCreate')->name('postCreate');
+        // 投稿詳細ページ表示
+        Route::get('/post/detail/{id}', 'PostsController@postDetail')->name('postDetail');
+        // 投稿編集ページ表示
     });
 
     // Admin\Postのまとまり
