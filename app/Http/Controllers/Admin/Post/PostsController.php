@@ -14,6 +14,6 @@ class PostsController extends Controller
     {
         $main_categories = PostMainCategory::get(); // メインカテゴリー取得
         $sub_categories = PostSubCategory::get(); // サブカテゴリー取得
-        return view('category', compact('main_categories','sub_categories'));
+        return view('admin.category', compact('main_categories','sub_categories'));
     }
 }

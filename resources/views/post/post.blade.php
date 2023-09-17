@@ -15,7 +15,7 @@
   <div class="">
     <!-- postsテーブルの値->リレーションメソッド->リレーションテーブルの値取得->取得したいカラム名 -->
     <p>{{ $post->user->username }}さん</p>
-    <p>{{ $post->event_at->format('Y年m月d日') }}</p>
+    <p>{{ $post->event_at->format('Y年n月j日') }}</p>
     <!-- 閲覧数 -->
   </div>
   <!-- 投稿タイトル -->

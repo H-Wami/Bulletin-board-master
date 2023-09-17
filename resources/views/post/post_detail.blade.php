@@ -13,7 +13,7 @@
   <div class="">
     <!-- postsテーブルの値->リレーションメソッド->リレーションテーブルの値取得->取得したいカラム名 -->
     <p>{{ $post->user->username }}さん</p>
-    <p>{{ $post->event_at->format('Y年m月d日') }}</p>
+    <p>{{ $post->event_at->format('Y年n月j日') }}</p>
     <!-- 閲覧数 -->
   </div>
   <!-- 2段目コンテンツまとめ -->
@@ -39,5 +39,47 @@
     <!-- コメント数 -->
     <!-- いいね -->
   </div>
+
+  <!-- コメント一覧 -->
+  <div>
+    <!-- メインカテゴリーに紐付いているサブカテゴリーを持ってくる $紐付いている元->リレーションメソッド -->
+    @foreach($post->postComments as $comment)
+    <!-- コメントひとまとめ -->
+    <div>
+      <!-- 上端コンテンツまとめ -->
+      <div>
+        <!-- post_commentsテーブルの値->リレーションメソッド->リレーションテーブルの値取得->取得したいカラム名 -->
+        <p>{{ $comment->commentUser($comment->user_id)->username }}さん</p>
+        <p>{{ $comment->event_at->format('Y年n月j日') }}</p>
+        <!-- もしログインユーザーならば編集ボタンを表示する -->
+        @if($comment->user_id === Auth::user()->id)
+        <div>
+          <a>編集</a>
+        </div>
+        @endif
+      </div>
+      <!-- 下端コンテンツまとめ -->
+      <div>
+        <p>{{ $comment->comment }}</p>
+        <!-- いいね -->
+      </div>
+    </div>
+    @endforeach
+  </div>
+
+  <!-- コメントフォーム -->
+  <div>
+    <!-- コメントバリデーションメッセージ -->
+    @if($errors->first('comment'))
+    <span class="error_message">{{ $errors->first('comment') }}</span><br>
+    @endif
+    <form action="{{ route('commentCreate') }}" method="POST">
+      {{ csrf_field() }} <!-- CSRF対策 -->
+      <textarea name="comment" placeholder="こちらからコメントできます">{{ old('comment') }}</textarea>
+      <input type="hidden" name="post_id" value="{{ $post->id }} ">
+      <input type="submit" value="コメント">
+    </form>
+  </div>
+
 </div>
 @endsection

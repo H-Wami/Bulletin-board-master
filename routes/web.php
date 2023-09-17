@@ -50,11 +50,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/post/create', 'PostsController@postCreate')->name('postCreate');
         // 投稿詳細ページ表示
         Route::get('/post/detail/{id}', 'PostsController@postDetail')->name('postDetail');
+        // 新規コメント機能
+        Route::post('/comment/create', 'PostCommentsController@commentCreate')->name('commentCreate');
         // 投稿編集ページ表示
         Route::get('/post/edit/{id}', 'PostsController@postEdit')->name('postEdit');
         // 投稿編集機能
-
+        Route::post('/post/update', 'PostsController@postUpdate')->name('postUpdate');
         // 投稿削除機能
+        Route::get('/post/delete/{id}', 'PostsController@postDelete')->name('postDelete');
     });
 
     // Admin\Postのまとまり

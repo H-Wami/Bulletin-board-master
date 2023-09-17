@@ -24,7 +24,8 @@ class Post extends Model
 
     // usersテーブルとリレーション　リレーション定義　1×多
     // 1側と結合 メソッド単数 belongsTo(対象先のモデル)
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\Models\Users\User');
     }
 
@@ -33,5 +34,12 @@ class Post extends Model
     public function postSubCategory()
     {
         return $this->belongsTo('App\Models\Posts\PostSubCategory');
+    }
+
+    // post_commentsテーブルとリレーション　リレーション定義　1×多
+    // 多側と結合 メソッド複数形 hasMany(対象先のモデル)
+    public function postComments()
+    {
+        return $this->hasMany('App\Models\Posts\PostComment');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Users\User;
 
 class PostComment extends Model
 {
@@ -16,4 +17,21 @@ class PostComment extends Model
         'comment',
         'event_at',
     ];
+
+    protected $dates = [
+        'event_at',
+    ];
+
+    // postsテーブルとリレーション　リレーション定義　1×多
+    // 1側と結合 メソッド単数 belongsTo(対象先のモデル)
+    public function post()
+    {
+        return $this->belongsTo('App\Models\Posts\Post');
+    }
+
+    // コメントしているかどうか
+    public function commentUser($user_id)
+    {
+        return User::where('id', $user_id)->first(); // usersテーブルのidカラムと$user_idが一致している->値を取得
+    }
 }

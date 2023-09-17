@@ -17,7 +17,7 @@ class PostMainCategoriesController extends Controller
         ],
         [
             'main_category.required' => 'メインカテゴリーは入力必須です。',
-            'main_category.max' => 'メインカテゴリーは100文字以内で入力して下さい。',
+            'main_category.max' => 'メインカテゴリーは100文字以下で入力して下さい。',
             'main_category.unique' => '登録済みのメインカテゴリーは作成できません。'
         ]);
 

@@ -24,7 +24,8 @@ class User extends Authenticatable
 
     // postsテーブルとリレーション　リレーション定義　1×多
     // 多側と結合 メソッド複数形 hasMany(対象先のモデル)
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany('App\Models\Posts\Post');
     }
 }
