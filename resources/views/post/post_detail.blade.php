@@ -54,7 +54,7 @@
         <!-- もしログインユーザーならば編集ボタンを表示する -->
         @if($comment->user_id === Auth::user()->id)
         <div>
-          <a>編集</a>
+          <a href="{{ route('commentEdit', ['id' => $comment->id]) }}">編集</a>
         </div>
         @endif
       </div>

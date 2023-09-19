@@ -20,7 +20,9 @@ class PostsController extends Controller
     public function postView()
     {
         $posts = Post::with('user', 'postComments')->latest()->get(); // Postモデルと関連するusersを取得->新しい順に全て取得
-        return view('post.post',compact('posts'));
+        $main_categories = PostMainCategory::get(); // メインカテゴリー取得
+        $sub_categories = PostSubCategory::get(); // サブカテゴリー取得
+        return view('post.post',compact('posts', 'main_categories', 'sub_categories'));
     }
 
     // 新規投稿ページ表示
@@ -55,7 +57,7 @@ class PostsController extends Controller
     // 投稿編集ページ表示
     public function postEdit($post_id)
     {
-        $post = Post::with('user', 'postComments')->findOrFail($post_id); // Postモデルと関連するusersを取得->$post_idの投稿を取得
+        $post = Post::with('user', 'postComments')->findOrFail($post_id); // Postモデルと関連するリレーションメソッドを取得->$post_idの投稿を取得
         $main_categories = PostMainCategory::get(); // メインカテゴリー取得
         $sub_categories = PostSubCategory::get(); // サブカテゴリー取得
         return view('post.post_edit', compact('post', 'main_categories', 'sub_categories'));

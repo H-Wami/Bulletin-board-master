@@ -58,6 +58,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/post/update', 'PostsController@postUpdate')->name('postUpdate');
         // 投稿削除機能
         Route::get('/post/delete/{id}', 'PostsController@postDelete')->name('postDelete');
+        // コメント編集ページ表示
+        Route::get('/comment/edit/{id}', 'PostCommentsController@commentEdit')->name('commentEdit');
+        // コメント編集機能
+        Route::post('/comment/update', 'PostCommentsController@commentUpdate')->name('commentUpdate');
+        // コメント削除機能
+        Route::get('/comment/delete/{id}', 'PostCommentsController@commentDelete')->name('commentDelete');
     });
 
     // Admin\Postのまとまり
