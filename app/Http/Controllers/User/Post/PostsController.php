@@ -9,6 +9,7 @@ use App\Models\Posts\PostSubCategory;
 use App\Models\Posts\PostMainCategory;
 use App\Models\Posts\Post;
 use App\Models\Posts\PostComment;
+use App\Models\ActionLogs\ActionLog;
 use App\Http\Requests\PostFormRequest; // フォームリクエスト使用
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
@@ -16,12 +17,37 @@ use Illuminate\Foundation\Http\FormRequest;
 class PostsController extends Controller
 {
 
-    // 投稿一覧ページ表示
-    public function postView()
+    // 投稿一覧ページ表示・投稿検索機能
+    public function postView(Request $request)
     {
+        // 投稿一覧表示
         $posts = Post::with('user', 'postComments')->latest()->get(); // Postモデルと関連するusersを取得->新しい順に全て取得
         $main_categories = PostMainCategory::get(); // メインカテゴリー取得
         $sub_categories = PostSubCategory::get(); // サブカテゴリー取得
+        // コメントの数表示
+        // いいねの数表示
+        // 投稿検索機能
+        if (!empty($request->keyword)) {
+            // もし検索ワードが入力されたら
+            $posts = Post::with('user', 'postComments')
+            ->where('title', 'like', '%'.$request->keyword.'%') // タイトルであいまい検索
+            ->orWhereHas('postSubCategory', function ($q) use ($request){
+                $q->where('sub_category', $request->keyword);
+            }) // サブカテゴリー完全一致検索
+            ->orWhere('post', 'like', '%' . $request->keyword . '%') // 投稿内容であいまい検索
+            ->latest()->get(); // 新しい順に全て取得
+        }else if($request->my_posts) { // 自分の投稿ボタンが押されたら
+            $posts = Post::with('user', 'postComments')
+            ->where('user_id', Auth::id())
+            ->latest()->get(); // postsテーブルのuser_idカラムとログインユーザーIDが同じ投稿を新しい順に全て取得
+        }else if($request->category_posts) { // サブカテゴリーが押されたら
+            $posts = Post::with('user', 'postComments')
+            ->whereHas('postSubCategory', function ($q) use ($request) {
+                $q->where('sub_category', $request->category_posts);
+            })->latest()->get(); // post_sub_categoriesテーブルのsub_categoryカラムと押したサブカテゴリーが同じ投稿を新しい順に全て取得
+        }{
+        }
+        // いいねした投稿ボタンが押されたら
         return view('post.post',compact('posts', 'main_categories', 'sub_categories'));
     }
 
@@ -51,6 +77,11 @@ class PostsController extends Controller
     public function postDetail($post_id)
     {
         $post = Post::with('user', 'postComments')->findOrFail($post_id); // Postモデルと関連するusersを取得->$post_idの投稿を取得
+        ActionLog::create([
+            'user_id' => Auth::id(),
+            'post_id' => $post_id,
+            'event_at' => now()
+        ]); // action_logsテーブルに閲覧した情報を保存する
         return view('post.post_detail', compact('post'));
     }
 
@@ -83,4 +114,8 @@ class PostsController extends Controller
 
         return redirect()->route('postView');
     }
+
+    // 投稿いいね作成機能
+
+    // 投稿いいね削除機能
 }

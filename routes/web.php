@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     // User\Postのまとまり
     Route::namespace('User\Post')->group(function () {
         // 投稿一覧ページ表示
-        Route::get('/post', 'PostsController@postView')->name('postView');
+        Route::get('/post/{keyword?}', 'PostsController@postView')->name('postView');
         // 新規投稿ページ表示
         Route::get('/post/input', 'PostsController@postInput')->name('postInput');
         // 新規投稿機能
@@ -58,12 +58,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/post/update', 'PostsController@postUpdate')->name('postUpdate');
         // 投稿削除機能
         Route::get('/post/delete/{id}', 'PostsController@postDelete')->name('postDelete');
+        // 投稿いいね作成機能
+        // 投稿いいね削除機能
         // コメント編集ページ表示
         Route::get('/comment/edit/{id}', 'PostCommentsController@commentEdit')->name('commentEdit');
         // コメント編集機能
         Route::post('/comment/update', 'PostCommentsController@commentUpdate')->name('commentUpdate');
         // コメント削除機能
         Route::get('/comment/delete/{id}', 'PostCommentsController@commentDelete')->name('commentDelete');
+        // コメントいいね作成機能
+        
+        // コメントいいね削除機能
     });
 
     // Admin\Postのまとまり

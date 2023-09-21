@@ -42,4 +42,11 @@ class Post extends Model
     {
         return $this->hasMany('App\Models\Posts\PostComment');
     }
+
+    // action_logsテーブルとリレーション　リレーション定義　1×多
+    // 多側と結合 メソッド複数形 hasMany(対象先のモデル)
+    public function actionLogs()
+    {
+        return $this->hasMany('App\Models\ActionLogs\ActionLog');
+    }
 }

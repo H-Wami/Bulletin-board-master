@@ -17,6 +17,7 @@
     <p>{{ $post->user->username }}さん</p>
     <p>{{ $post->event_at->format('Y年n月j日') }}</p>
     <!-- 閲覧数 -->
+    <p>{{ $post->actionLogs($post->id)->count() }}Views</p>
   </div>
   <!-- 投稿タイトル -->
   <div class="">
@@ -26,7 +27,10 @@
   <div>
     <p>{{ $post->postSubCategory->sub_category }}</p>
     <!-- コメント数 -->
+    <p>コメント数 {{ $post->postComments($post->id)->count() }}</p>
     <!-- いいね -->
+    <i class="bi bi-heart"></i>
+      <p></p>
   </div>
   @endforeach
 </div>
@@ -42,13 +46,13 @@
   <!-- 検索フォーム -->
   <div>
     <form action="{{ route('postView') }}" method="GET" id="postSearchRequest"></form>
-    <input type="text" form="postSearchRequest">
-    <input type="submit" name="" value="検索" form="postSearchRequest">
+    <input type="text" name="keyword" form="postSearchRequest">
+    <input type="submit" value="検索" form="postSearchRequest">
   </div>
   <!-- いいねした投稿ボタン -->
-  <input type="submit" name="" value="いいねした投稿" form="postSearchRequest">
+  <input type="submit" name="like_posts" value="いいねした投稿" form="postSearchRequest">
   <!-- 自分の投稿ボタン -->
-  <input type="submit" name="" value="自分の投稿" id="postSearchRequest">
+  <input type="submit" name="my_posts" value="自分の投稿" form="postSearchRequest">
   <!-- カテゴリー検索 -->
   <div>
     <p>カテゴリー</p>
@@ -61,7 +65,7 @@
       <!-- サブカテゴリー表示 -->
       <!-- メインカテゴリーに紐付いているサブカテゴリーを持ってくる $紐付いている元->リレーションメソッド -->
       @foreach($main_category->postSubCategories as $sub_category)
-      <input type="submit" name="" value="{{ $sub_category->sub_category }}" id="postSearchRequest">
+      <input type="submit" name="category_posts" value="{{ $sub_category->sub_category }}" form="postSearchRequest">
       @endforeach <!-- サブカテゴリーのend -->
       </li>
       @endforeach <!-- メインカテゴリーのend -->

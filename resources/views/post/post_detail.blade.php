@@ -15,6 +15,7 @@
     <p>{{ $post->user->username }}さん</p>
     <p>{{ $post->event_at->format('Y年n月j日') }}</p>
     <!-- 閲覧数 -->
+    <p>{{ $post->actionLogs($post->id)->count() }}Views</p>
   </div>
   <!-- 2段目コンテンツまとめ -->
   <div class="">
@@ -37,6 +38,7 @@
   <div>
     <p>{{ $post->postSubCategory->sub_category }}</p>
     <!-- コメント数 -->
+    <p>コメント数 {{ $post->postComments($post->id)->count() }}</p>
     <!-- いいね -->
   </div>
 
