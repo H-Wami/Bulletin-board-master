@@ -29,8 +29,15 @@
     <!-- コメント数 -->
     <p>コメント数 {{ $post->postComments($post->id)->count() }}</p>
     <!-- いいね -->
-    <i class="bi bi-heart"></i>
-      <p></p>
+    <!-- ログインユーザーがいいねをしていたらいいね削除アイコン表示 -->
+    @if(Auth::user()->isLike($post->id))
+    <i class="bi bi-heart-fill" post_id="{{ $post->id }}"></i>
+    <p></p>
+    @else
+    <!-- いいねをしていなければいいね登録アイコン表示 -->
+    <i class="bi bi-heart" post_id="{{ $post->id }}"></i>
+    <p></p>
+    @endif
   </div>
   @endforeach
 </div>

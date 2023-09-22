@@ -67,8 +67,9 @@ Route::group(['middleware' => ['auth']], function () {
         // コメント削除機能
         Route::get('/comment/delete/{id}', 'PostCommentsController@commentDelete')->name('commentDelete');
         // コメントいいね作成機能
-        
+        Route::post('/post/like/{id}', 'PostsController@postLike')->name('postLike');
         // コメントいいね削除機能
+        Route::post('/post/unlike/{id}', 'PostsController@postUnlike')->name('postUnlike');
     });
 
     // Admin\Postのまとまり

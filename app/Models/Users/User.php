@@ -2,9 +2,11 @@
 
 namespace App\Models\Users;
 
+use App\Models\Posts\PostFavorite;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -34,5 +36,11 @@ class User extends Authenticatable
     public function postFavorites()
     {
         return $this->hasMany('App\Models\Posts\PostFavorite');
+    }
+
+    // いいねしているかどうか
+    public function isLike($post_id)
+    {
+        return PostFavorite::where('user_id', Auth::id())->where('post_id', $post_id)->first(['post_favorites.id']);  // post_favoritesテーブルのuser_idカラムとログインユーザーIDが同じ->post_idカラムと$post_idが同じ->post_favoritesテーブルのIDを取得する
     }
 }
