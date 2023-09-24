@@ -6,6 +6,15 @@
   padding: 0;
 }
 
-.login_header{
-  display: flex;
+.unlike_btn,
+.like_btn{
+  cursor: pointer;
+}
+
+.unlike_btn{
+  color: deeppink;
+}
+
+.like_btn{
+  color: #999;
 }

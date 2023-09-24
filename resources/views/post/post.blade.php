@@ -31,11 +31,11 @@
     <!-- いいね -->
     <!-- ログインユーザーがいいねをしていたらいいね削除アイコン表示 -->
     @if(Auth::user()->isLike($post->id))
-    <i class="bi bi-heart-fill" post_id="{{ $post->id }}"></i>
+    <i class="bi bi-heart-fill unlike_btn" post_id="{{ $post->id }}"></i>
     <p></p>
     @else
     <!-- いいねをしていなければいいね登録アイコン表示 -->
-    <i class="bi bi-heart" post_id="{{ $post->id }}"></i>
+    <i class="bi bi-heart like_btn" post_id="{{ $post->id }}"></i>
     <p></p>
     @endif
   </div>

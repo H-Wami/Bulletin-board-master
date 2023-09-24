@@ -6,6 +6,8 @@
   <!-- スマホタブレット対応 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bulletin_Board</title>
+  <!-- CSRFトークン取得 -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- CSS -->
   <!-- <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
   <link href="{{ asset('css/style.css') }}" rel="stylesheet"> -->

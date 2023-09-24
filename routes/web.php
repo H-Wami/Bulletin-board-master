@@ -59,7 +59,9 @@ Route::group(['middleware' => ['auth']], function () {
         // 投稿削除機能
         Route::get('/post/delete/{id}', 'PostsController@postDelete')->name('postDelete');
         // 投稿いいね作成機能
+        Route::post('/post/like/{id}', 'PostFavoritesController@postLike')->name('postLike');
         // 投稿いいね削除機能
+        Route::post('/post/unlike/{id}', 'PostFavoritesController@postUnlike')->name('postUnlike');
         // コメント編集ページ表示
         Route::get('/comment/edit/{id}', 'PostCommentsController@commentEdit')->name('commentEdit');
         // コメント編集機能
@@ -67,9 +69,9 @@ Route::group(['middleware' => ['auth']], function () {
         // コメント削除機能
         Route::get('/comment/delete/{id}', 'PostCommentsController@commentDelete')->name('commentDelete');
         // コメントいいね作成機能
-        Route::post('/post/like/{id}', 'PostsController@postLike')->name('postLike');
+
         // コメントいいね削除機能
-        Route::post('/post/unlike/{id}', 'PostsController@postUnlike')->name('postUnlike');
+
     });
 
     // Admin\Postのまとまり
