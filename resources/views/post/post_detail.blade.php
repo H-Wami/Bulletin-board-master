@@ -40,6 +40,15 @@
     <!-- コメント数 -->
     <p>コメント数 {{ $post->postComments($post->id)->count() }}</p>
     <!-- いいね -->
+    <!-- ログインユーザーがいいねをしていたらいいね削除アイコン表示 -->
+    @if(Auth::user()->isLike($post->id))
+    <i class="bi bi-heart-fill unlike_btn" post_id="{{ $post->id }}"></i>
+    <p class="like_counts{{ $post->id }}">{{ $favorite->likeCounts($post->id) }}</p>
+    @else
+    <!-- いいねをしていなければいいね登録アイコン表示 -->
+    <i class="bi bi-heart like_btn" post_id="{{ $post->id }}"></i>
+    <p class="like_counts{{ $post->id }}">{{ $favorite->likeCounts($post->id) }}</p>
+    @endif
   </div>
 
   <!-- コメント一覧 -->
@@ -64,6 +73,15 @@
       <div>
         <p>{{ $comment->comment }}</p>
         <!-- いいね -->
+        <!-- ログインユーザーがいいねをしていたらいいね削除アイコン表示 -->
+        @if(Auth::user()->isCommentLike($comment->id))
+        <i class="bi bi-heart-fill unlike_btn" post_comment_id="{{ $comment->id }}"></i>
+        <p class="comment_like_counts{{ $comment->id }}">{{ $comment_favorite->commentLikeCounts($comment->id) }}</p>
+        @else
+        <!-- いいねをしていなければいいね登録アイコン表示 -->
+        <i class="bi bi-heart like_btn" post_comment_id="{{ $comment->id }}"></i>
+        <p class="comment_like_counts{{ $comment->id }}">{{ $comment_favorite->commentLikeCounts($comment->id) }}</p>
+        @endif
       </div>
     </div>
     @endforeach

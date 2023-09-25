@@ -29,6 +29,14 @@ class PostComment extends Model
         return $this->belongsTo('App\Models\Posts\Post');
     }
 
+    // post_comment_favoritesテーブルとリレーション　リレーション定義　1×多
+    // 多側と結合 メソッド複数形 hasMany(対象先のモデル)
+    public function postCommentFavorites()
+    {
+        return $this->hasMany
+        ('App\Models\Posts\PostCommentFavorite');
+    }
+
     // コメントしているかどうか
     public function commentUser($user_id)
     {

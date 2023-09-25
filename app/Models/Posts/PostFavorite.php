@@ -19,4 +19,11 @@ class PostFavorite extends Model
     {
         return $this->belongsTo('App\Models\Users\User');
     }
+
+    // いいねの数表示
+    public function likeCounts($post_id)
+    {
+        return $this->where('post_id', $post_id)->get()->count(); // post_favoritesテーブルのpost_idと$post_idが一致している投稿を取得して数を表示する。
+    }
+
 }

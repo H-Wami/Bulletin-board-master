@@ -12,6 +12,7 @@ use App\Models\Posts\PostComment;
 use App\Models\ActionLogs\ActionLog;
 use App\Models\Posts\PostFavorite;
 use App\Http\Requests\PostFormRequest; // フォームリクエスト使用
+use App\Models\Posts\PostCommentFavorite;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,7 +27,7 @@ class PostsController extends Controller
         $main_categories = PostMainCategory::get(); // メインカテゴリー取得
         $sub_categories = PostSubCategory::get(); // サブカテゴリー取得
         // コメントの数表示
-        // いいねの数表示
+        $favorite = new PostFavorite; // PostFavoriteモデルインスタンス化 (いいねの数表示)
         // 投稿検索機能
         if (!empty($request->keyword)) {
             // もし検索ワードが入力されたら
@@ -46,10 +47,12 @@ class PostsController extends Controller
             ->whereHas('postSubCategory', function ($q) use ($request) {
                 $q->where('sub_category', $request->category_posts);
             })->latest()->get(); // post_sub_categoriesテーブルのsub_categoryカラムと押したサブカテゴリーが同じ投稿を新しい順に全て取得
-        }{
+        }else if($request->like_posts) { // いいねした投稿ボタンが押されたら
+            $likes = Auth::user()->likePostId()->get('post_id'); // ログインユーザーの情報->post_favoritesテーブルのuser_idカラムとログインユーザーIDが一致している->post_idカラムを取得
+            $posts = Post::with('user', 'postComments')
+            ->whereIn('id', $likes)->latest()->get(); // postsテーブルのidカラムと押した$likesが同じ投稿を新しい順に全て取得
         }
-        // いいねした投稿ボタンが押されたら
-        return view('post.post',compact('posts', 'main_categories', 'sub_categories'));
+        return view('post.post',compact('posts', 'main_categories', 'sub_categories', 'favorite'));
     }
 
     // 新規投稿ページ表示
@@ -78,12 +81,14 @@ class PostsController extends Controller
     public function postDetail($post_id)
     {
         $post = Post::with('user', 'postComments')->findOrFail($post_id); // Postモデルと関連するusersを取得->$post_idの投稿を取得
+        $favorite = new PostFavorite; // PostFavoriteモデルインスタンス化 (投稿いいねの数表示)
+        $comment_favorite =new PostCommentFavorite(); // PostCommentFavoriteモデルインスタンス化 (コメントいいねの数表示)
         ActionLog::create([
             'user_id' => Auth::id(),
             'post_id' => $post_id,
             'event_at' => now()
         ]); // action_logsテーブルに閲覧した情報を保存する
-        return view('post.post_detail', compact('post'));
+        return view('post.post_detail', compact('post','favorite','comment_favorite'));
     }
 
     // 投稿編集ページ表示
