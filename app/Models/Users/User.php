@@ -54,7 +54,8 @@ class User extends Authenticatable
     // コメントにいいねしているかどうか
     public function isCommentLike($post_comment_id)
     {
-        return PostCommentFavorite::where('user_id', Auth::id())->where('post_comment_id', $post_comment_id)->first(['post_comment_favorites.id']);  // post_comment_favoritesテーブルのuser_idカラムとログインユーザーIDが同じ->post_comment_idカラムと$post_comment_idが同じ->post_comment_favoritesテーブルのIDを取得する
+        return PostCommentFavorite::where('user_id', Auth::id())->where('post_comment_id', $post_comment_id)->first(['post_comment_favorites.id']);
+        // post_comment_favoritesテーブルのuser_idカラムとログインユーザーIDが同じ->post_comment_idカラムと$post_comment_idが同じ->post_comment_favoritesテーブルのIDを取得する
     }
 
 }
