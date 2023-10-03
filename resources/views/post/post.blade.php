@@ -8,61 +8,71 @@
 
 @section('content')
 <!-- 左側:投稿一覧 -->
-<div class="">
+<div class="post_list">
   @foreach($posts as $post)
   <!-- 投稿ひとまとめ -->
-  <!-- 上端コンテンツまとめ -->
-  <div class="">
-    <!-- postsテーブルの値->リレーションメソッド->リレーションテーブルの値取得->取得したいカラム名 -->
-    <p>{{ $post->user->username }}さん</p>
-    <p>{{ $post->event_at->format('Y年n月j日') }}</p>
-    <!-- 閲覧数 -->
-    <p>{{ $post->actionLogs($post->id)->count() }}Views</p>
-  </div>
-  <!-- 投稿タイトル -->
-  <div class="">
-    <a href="{{ route('postDetail',['id' => $post->id]) }}">{{ $post->title }}</a>
-  </div>
-  <!-- 下端コンテンツまとめ -->
-  <div>
-    <p>{{ $post->postSubCategory->sub_category }}</p>
-    <!-- コメント数 -->
-    <p>コメント数 {{ $post->postComments($post->id)->count() }}</p>
-    <!-- いいね -->
-    <!-- ログインユーザーがいいねをしていたらいいね削除アイコン表示 -->
-    @if(Auth::user()->isLike($post->id))
-    <i class="bi bi-heart-fill unlike_btn" post_id="{{ $post->id }}"></i>
-    <p class="like_counts{{ $post->id }}">{{ $favorite->likeCounts($post->id) }}</p>
-    @else
-    <!-- いいねをしていなければいいね登録アイコン表示 -->
-    <i class="bi bi-heart like_btn" post_id="{{ $post->id }}"></i>
-    <p class="like_counts{{ $post->id }}">{{ $favorite->likeCounts($post->id) }}</p>
-    @endif
+  <div class="post_unit">
+    <!-- 上端コンテンツまとめ -->
+    <div class="post_head">
+      <!-- postsテーブルの値->リレーションメソッド->リレーションテーブルの値取得->取得したいカラム名 -->
+      <p>{{ $post->user->username }}さん</p>
+      <p>{{ $post->event_at->format('Y年n月j日') }}</p>
+      <!-- 閲覧数 -->
+      <p>{{ $post->actionLogs($post->id)->count() }}Views</p>
+    </div>
+    <!-- 投稿タイトル -->
+    <div class="post_detail_link">
+      <a href="{{ route('postDetail',['id' => $post->id]) }}">{{ $post->title }}</a>
+    </div>
+    <!-- 下端コンテンツまとめ -->
+    <div class="post_foot">
+      <p class="btn btn-primary btn-sm">{{ $post->postSubCategory->sub_category }}</p>
+      <!-- コメント数 -->
+      <p>コメント数　{{ $post->postComments($post->id)->count() }}</p>
+      <!-- いいね -->
+      <!-- ログインユーザーがいいねをしていたらいいね削除アイコン表示 -->
+      @if(Auth::user()->isLike($post->id))
+      <div class="like_unit">
+        <i class="bi bi-heart-fill unlike_btn" post_id="{{ $post->id }}"></i>
+        <p class="like_counts{{ $post->id }}">{{ $favorite->likeCounts($post->id) }}</p>
+      </div>
+      @else
+      <!-- いいねをしていなければいいね登録アイコン表示 -->
+      <div class="like_unit">
+        <i class="bi bi-heart like_btn" post_id="{{ $post->id }}"></i>
+        <p class="like_counts{{ $post->id }}">{{ $favorite->likeCounts($post->id) }}</p>
+      </div>
+      @endif
+    </div>
   </div>
   @endforeach
 </div>
 
 <!-- 右側 -->
-<div class="">
+<div class="post_side">
   <!-- もしログインユーザーが管理者だったらボタン表示 -->
-  @if(Auth::user()->admin_role === 1)
-  <a href="{{ route('categoryView') }}">カテゴリーを追加</a>
-  @endif
+  <div class="side_content">
+    @if(Auth::user()->admin_role === 1)
+    <a href="{{ route('categoryView') }}" class="btn btn-danger">カテゴリーを追加</a>
+    @endif
+  </div>
   <!-- 新規投稿ボタン -->
-  <a href="{{ route('postInput') }}">投稿</a>
+  <div class="side_content">
+    <a href="{{ route('postInput') }}" class="btn btn-primary">投稿</a>
+  </div>
   <!-- 検索フォーム -->
-  <div>
+  <div class="search_form">
     <form action="{{ route('postView') }}" method="GET" id="postSearchRequest"></form>
-    <input type="text" name="keyword" form="postSearchRequest">
-    <input type="submit" value="検索" form="postSearchRequest">
+    <input type="text" name="keyword" form="postSearchRequest" class="form-control">
+    <input type="submit" value="検索" form="postSearchRequest" class="btn btn-primary">
   </div>
   <!-- いいねした投稿ボタン -->
-  <input type="submit" name="like_posts" value="いいねした投稿" form="postSearchRequest">
+  <input type="submit" name="like_posts" value="いいねした投稿" form="postSearchRequest" class="btn btn-primary">
   <!-- 自分の投稿ボタン -->
-  <input type="submit" name="my_posts" value="自分の投稿" form="postSearchRequest">
+  <input type="submit" name="my_posts" value="自分の投稿" form="postSearchRequest" class="btn btn-primary">
   <!-- カテゴリー検索 -->
-  <div>
-    <p>カテゴリー</p>
+  <div class="category_search">
+    <p class="category_title">カテゴリー</p>
     <!-- カテゴリーひとまとめ -->
     <ul>
       <!-- メインカテゴリー表示 -->
@@ -72,12 +82,11 @@
       <!-- サブカテゴリー表示 -->
       <!-- メインカテゴリーに紐付いているサブカテゴリーを持ってくる $紐付いている元->リレーションメソッド -->
       @foreach($main_category->postSubCategories as $sub_category)
-      <input type="submit" name="category_posts" value="{{ $sub_category->sub_category }}" form="postSearchRequest">
+      <input type="submit" name="category_posts" value="{{ $sub_category->sub_category }}" form="postSearchRequest" class="search_sub_category">
       @endforeach <!-- サブカテゴリーのend -->
       </li>
       @endforeach <!-- メインカテゴリーのend -->
     </ul>
   </div>
-
 </div>
 @endsection

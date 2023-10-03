@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
         // 投稿一覧ページ表示
         Route::get('/post/{keyword?}', 'PostsController@postView')->name('postView');
         // 新規投稿ページ表示
-        Route::get('/post/input', 'PostsController@postInput')->name('postInput');
+        Route::get('/input', 'PostsController@postInput')->name('postInput');
         // 新規投稿機能
         Route::post('/post/create', 'PostsController@postCreate')->name('postCreate');
         // 投稿詳細ページ表示

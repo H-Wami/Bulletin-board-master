@@ -22,15 +22,17 @@
 </head>
 
 <body>
-  <div class="login_container">
+  <div class="main_wrapper">
     <!-- タイトル -->
-    <header class="login_header">
+    <header class="main_header">
       @yield('title')
-      <a href="{{ route('postView') }}">投稿一覧</a>
-      <a href="{{ route('logout') }}">ログアウト</a>
+      <div class="header_link">
+        <a href="{{ route('postView') }}" class="btn btn-primary">投稿一覧</a>
+        <a href="{{ route('logout') }}" class="btn btn-primary">ログアウト</a>
+      </div>
     </header>
     <!-- 中身 -->
-    <div>
+    <div class="main_contents">
       @yield('content')
     </div>
   </div>

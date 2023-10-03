@@ -6,7 +6,7 @@
   padding: 0;
 }
 
-/* 共通パーツ */
+/* 共通パーツ 全体 */
 html {
   height: 100vh;
   font-size: 16px;
@@ -29,38 +29,35 @@ input {
   border: solid 1px #DEE2E6;
 }
 
-/* select {
-  -moz-appearance: menulist;
-  -webkit-appearance: menulist;
-  appearance: menulist;
-} */
-
-ul,
-li {
-  list-style: none;
-}
-
-.unlike_btn,
-.like_btn{
-  cursor: pointer;
-}
-
-.unlike_btn{
-  color: deeppink;
-}
-
-.like_btn{
-  color: #999;
-}
-
-h1{
-  font-weight: bolder;
-}
-
 .error_message{
   font-size: 12px;
   color: #dc3545;
   font-weight: bold;
+}
+
+/* 共通パーツ ログイン前 */
+.login_content,
+.register_content {
+  width: 75%;
+  margin: 15px auto;
+}
+
+h1 {
+  font-weight: bolder;
+}
+
+.login_btn,
+.register_btn {
+  width: 75%;
+  text-align: right;
+  margin: 0 auto;
+}
+
+.register_link a,
+.added_contents a{
+  font-weight: bold;
+  color: #0d6efd;
+  text-decoration: none;
 }
 
 /* ログインページ */
@@ -82,28 +79,9 @@ h1{
   padding: 10px 0 10px 0;
 }
 
-.login_content,
-.register_content{
-  width: 75%;
-  margin: 15px auto;
-}
-
-.login_btn,
-.register_btn {
-  width: 75%;
-  text-align: right;
-  margin: 0 auto;
-}
-
 .register_link{
   text-align: center;
   margin: 15px auto;
-}
-
-.register_link a{
-  font-weight: bold;
-  color: #0d6efd;
-  text-decoration: none;
 }
 
 /* 新規登録ページ */
@@ -122,4 +100,158 @@ h1{
   border-radius: 10px;
   box-shadow: 2px 2px 6px #444;
   padding: 15px 0 30px 0;
+}
+
+/* 登録確認ページ */
+.added_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.added_contents {
+  width: 30%;
+  height: 50vh;
+  display: flex;
+  flex-flow: column;
+  background: #333;
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px #444;
+  align-items: center;
+  justify-content: center;
+}
+
+.added_contents p{
+  font-size: 18px;
+}
+
+/* 共通パーツ ログイン後 */
+ul,
+li {
+  list-style: none;
+}
+
+.unlike_btn,
+.like_btn {
+  cursor: pointer;
+}
+
+.unlike_btn {
+  color: deeppink;
+}
+
+.like_btn {
+  color: #999;
+}
+
+.like_unit{
+  display: flex;
+}
+
+.like_unit p{
+  margin-left: 10px;
+}
+
+.main_wrapper {
+  width: 85%;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.main_header{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 20px 0;
+}
+
+.main_header h2{
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.header_link a{
+  margin-right: 10px;
+}
+
+.main_contents{
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* 投稿一覧ページ */
+.post_list{
+  width: 70%;
+}
+
+.post_side{
+  width: 30%;
+}
+
+.side_content{
+  margin-bottom: 8px;
+}
+
+.search_form{
+  width: 70%;
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.category_title{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 12px 0 0 0;
+}
+
+.category_search ul span{
+  font-size: 18px;
+}
+
+.search_sub_category{
+  display: block;
+  border: none;
+  color: #0d6efd;
+}
+
+.post_unit{
+  width: 70%;
+  border: solid 1px #fff;
+  padding: 10px 15px 10px 15px;
+  margin-bottom: 15px;
+}
+
+.post_head{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.post_head p,
+.post_foot p{
+  margin-bottom: 0;
+}
+
+.post_detail_link a{
+  font-size: 20px;
+  text-decoration: none;
+  color: #0d6efd;
+}
+
+.post_foot {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
 }

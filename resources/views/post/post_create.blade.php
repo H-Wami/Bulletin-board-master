@@ -8,7 +8,7 @@
 
 @section('content')
 
-<!-- バリデーションメッセージ -->
+バリデーションメッセージ
 @if ($errors->any())
 <div class="post_error">
   <ul>
@@ -18,6 +18,7 @@
   </ul>
 </div>
 @endif
+
 <div class="">
   <form action="{{ route('postCreate') }}" method="POST">
     {{ csrf_field() }} <!-- CSRF対策 -->

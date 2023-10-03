@@ -60,7 +60,7 @@ class PostsController extends Controller
     {
         $main_categories = PostMainCategory::get(); // メインカテゴリー取得
         $sub_categories = PostSubCategory::get(); // サブカテゴリー取得
-        return view('post.post_create',compact('main_categories','sub_categories'));
+        return view('post.post_create', compact('main_categories', 'sub_categories'));
     }
 
     // 新規投稿機能
