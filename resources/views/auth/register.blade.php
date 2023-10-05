@@ -44,7 +44,7 @@
                 <input type="password" name="password_confirmation" class="form-control">
             </div>
             <div class="register_btn">
-                <input type="submit" value="確認" onclick="return confirm('登録してよろしいですか？')" class="btn btn-primary">
+                <input type="submit" value="Register" onclick="return confirm('登録してよろしいですか？')" class="btn btn-primary">
             </div>
         </form>
     </div>

@@ -192,7 +192,7 @@ li {
   width: 70%;
 }
 
-.post_side{
+.post_side {
   width: 30%;
 }
 
@@ -254,4 +254,40 @@ li {
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+}
+
+/* カテゴリー作成ページ */
+.category_list {
+  width: 30%;
+  display: flex;
+  flex-flow: column;
+}
+.category_list_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.main_category_item {
+  font-size: 18px;
+}
+
+.sub_category_group{
+  display: flex;
+  align-items: center;
+}
+
+.sub_category_item {
+  display: block;
+  color: #0d6efd;
+  margin: 5px 0 5px 0;
+}
+
+.sub_category_group a{
+  text-decoration: none;
+  margin: 3px 0 0 5px;
+}
+
+.category_form {
+  width: 70%;
 }

@@ -27,8 +27,8 @@
     <header class="main_header">
       @yield('title')
       <div class="header_link">
-        <a href="{{ route('postView') }}" class="btn btn-primary">投稿一覧</a>
-        <a href="{{ route('logout') }}" class="btn btn-primary">ログアウト</a>
+        <a href="{{ route('postView') }}" class="btn btn-primary">Post List</a>
+        <a href="{{ route('logout') }}" class="btn btn-primary">Logout</a>
       </div>
     </header>
     <!-- 中身 -->

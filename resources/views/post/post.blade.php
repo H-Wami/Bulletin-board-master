@@ -2,7 +2,7 @@
 
 @section('title')
 
-<h2>掲示板投稿一覧</h2>
+<h2>Post List</h2>
 
 @endsection
 
@@ -53,37 +53,37 @@
   <!-- もしログインユーザーが管理者だったらボタン表示 -->
   <div class="side_content">
     @if(Auth::user()->admin_role === 1)
-    <a href="{{ route('categoryView') }}" class="btn btn-danger">カテゴリーを追加</a>
+    <a href="{{ route('categoryView') }}" class="btn btn-danger">New Category</a>
     @endif
   </div>
   <!-- 新規投稿ボタン -->
   <div class="side_content">
-    <a href="{{ route('postInput') }}" class="btn btn-primary">投稿</a>
+    <a href="{{ route('postInput') }}" class="btn btn-primary">New Post</a>
   </div>
   <!-- 検索フォーム -->
   <div class="search_form">
     <form action="{{ route('postView') }}" method="GET" id="postSearchRequest"></form>
     <input type="text" name="keyword" form="postSearchRequest" class="form-control">
-    <input type="submit" value="検索" form="postSearchRequest" class="btn btn-primary">
+    <input type="submit" value="Search" form="postSearchRequest" class="btn btn-primary">
   </div>
   <!-- いいねした投稿ボタン -->
-  <input type="submit" name="like_posts" value="いいねした投稿" form="postSearchRequest" class="btn btn-primary">
+  <input type="submit" name="like_posts" value="Like Posts" form="postSearchRequest" class="btn btn-primary">
   <!-- 自分の投稿ボタン -->
-  <input type="submit" name="my_posts" value="自分の投稿" form="postSearchRequest" class="btn btn-primary">
+  <input type="submit" name="my_posts" value="My Posts" form="postSearchRequest" class="btn btn-primary">
   <!-- カテゴリー検索 -->
   <div class="category_search">
-    <p class="category_title">カテゴリー</p>
+    <p class="category_title">Category</p>
     <!-- カテゴリーひとまとめ -->
     <ul>
       <!-- メインカテゴリー表示 -->
       @foreach($main_categories as $main_category)
-      <li category_id="{{ $main_category->id }}"></li>
-      <span>{{ $main_category->main_category }}</span>
-      <!-- サブカテゴリー表示 -->
-      <!-- メインカテゴリーに紐付いているサブカテゴリーを持ってくる $紐付いている元->リレーションメソッド -->
-      @foreach($main_category->postSubCategories as $sub_category)
-      <input type="submit" name="category_posts" value="{{ $sub_category->sub_category }}" form="postSearchRequest" class="search_sub_category">
-      @endforeach <!-- サブカテゴリーのend -->
+      <li category_id="{{ $main_category->id }}">
+        <span>{{ $main_category->main_category }}</span>
+        <!-- サブカテゴリー表示 -->
+        <!-- メインカテゴリーに紐付いているサブカテゴリーを持ってくる $紐付いている元->リレーションメソッド -->
+        @foreach($main_category->postSubCategories as $sub_category)
+        <input type="submit" name="category_posts" value="{{ $sub_category->sub_category }}" form="postSearchRequest" class="search_sub_category">
+        @endforeach <!-- サブカテゴリーのend -->
       </li>
       @endforeach <!-- メインカテゴリーのend -->
     </ul>
