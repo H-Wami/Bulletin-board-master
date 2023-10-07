@@ -2,28 +2,22 @@
 
 @section('title')
 
-<h2>投稿編集画面</h2>
+<h2>Post Edit</h2>
 
 @endsection
 
 @section('content')
 
-<!-- バリデーションメッセージ -->
-@if ($errors->any())
-<div class="post_error">
-  <ul>
-    @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-  </ul>
-</div>
-@endif
-
-<div class="post_edit_container">
+<div class="common_container">
   <form action="{{ route('postUpdate') }}" method="POST">
     {{ csrf_field() }} <!-- CSRF対策 -->
+    @if($errors->has('post_sub_category_id'))
+    @foreach($errors->get('post_sub_category_id') as $message)
+    <span class="error_message">{{ $message }}</span><br>
+    @endforeach
+    @endif
     <label>サブカテゴリー</label>
-    <select class="post_sub_category_id_edit" name="post_sub_category_id" value="{{ $post->post_sub_category_id }}">
+    <select class="form-select" name="post_sub_category_id" value="{{ $post->post_sub_category_id }}">
       <option value="none"></option>
       <!-- メインカテゴリー表示 -->
       @foreach($main_categories as $main_category)
@@ -41,16 +35,26 @@
       </optgroup>
       @endforeach <!-- メインカテゴリーのend -->
     </select>
+    @if($errors->has('title'))
+    @foreach($errors->get('title') as $message)
+    <span class="error_message">{{ $message }}</span><br>
+    @endforeach
+    @endif
     <label>タイトル</label>
-    <input class="title_edit" type="text" name="title" value="{{ $post->title }}">
+    <input class="form-control" type="text" name="title" value="{{ $post->title }}">
+    @if($errors->has('post'))
+    @foreach($errors->get('post') as $message)
+    <span class="error_message">{{ $message }}</span><br>
+    @endforeach
+    @endif
     <label>投稿内容</label>
-    <textarea class="post_edit" name="post" value="{{ $post->post }}">{{ $post->post }}</textarea>
+    <textarea class="form-control" name="post" value="{{ $post->post }}">{{ $post->post }}</textarea>
     <input type="hidden" name="post_id" value="{{ $post->id }}">
-    <input type="submit" value="編集">
+    <input type="submit" value="編集" class="btn btn-primary">
   </form>
   <!-- 削除ボタン -->
   <div>
-    <a href="{{ route('postDelete',['id' => $post->id]) }}" onclick="return confirm('投稿を削除してもよろしいでしょうか？')">削除</a>
+    <a href="{{ route('postDelete',['id' => $post->id]) }}" onclick="return confirm('投稿を削除してもよろしいでしょうか？')" class="btn btn-danger">削除</a>
   </div>
 </div>
 

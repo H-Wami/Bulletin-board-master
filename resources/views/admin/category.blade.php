@@ -8,21 +8,15 @@
 
 @section('content')
 <div class="category_form">
-  <!-- バリデーションメッセージ -->
-  @if ($errors->any())
-  <div class="category_error">
-    <ul>
-      @foreach ($errors->all() as $error)
-      <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  </div>
-  @endif
-
   <!-- メインカテゴリー作成 -->
-  <div>
+  <div class="main_category_form">
     <form action="{{ route('mainCategoryCreate') }}" method="POST">
       {{ csrf_field() }}<!-- CSRF対策 -->
+      @if($errors->has('main_category'))
+      @foreach($errors->get('main_category') as $message)
+      <span class="error_message">{{ $message }}</span><br>
+      @endforeach
+      @endif
       <label>新規メインカテゴリー</label>
       <input type="text" name="main_category" value="{{ old('main_category') }}" class="form-control">
       <input type="submit" value="登録" class="btn btn-danger">
@@ -30,10 +24,15 @@
   </div>
 
   <!-- サブカテゴリー作成 -->
-  <div>
+  <div class="sub_category_form">
     <form action="{{ route('subCategoryCreate') }}" method="POST">
       {{ csrf_field() }}<!-- CSRF対策 -->
       <!-- メインカテゴリー選択 -->
+      @if($errors->has('post_main_category_id'))
+      @foreach($errors->get('post_main_category_id') as $message)
+      <span class="error_message">{{ $message }}</span><br>
+      @endforeach
+      @endif
       <label>メインカテゴリー</label>
       <select name="post_main_category_id" class="form-select">
         <option value="none"></option>
@@ -42,6 +41,11 @@
         @endforeach
       </select>
       <!-- サブカテゴリー入力 -->
+      @if($errors->has('sub_category'))
+      @foreach($errors->get('sub_category') as $message)
+      <span class="error_message">{{ $message }}</span><br>
+      @endforeach
+      @endif
       <label>新規サブカテゴリー</label>
       <input type="text" name="sub_category" value="{{ old('sub_category') }}" class="form-control">
       <input type="submit" value="登録" class="btn btn-danger">
