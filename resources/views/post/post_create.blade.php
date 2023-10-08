@@ -16,7 +16,7 @@
     <span class="error_message">{{ $message }}</span><br>
     @endforeach
     @endif
-    <label>サブカテゴリー</label>
+    <label>Sub Category</label>
     <select name="post_sub_category_id" class="form-select">
       <option value="none"></option>
       <!-- メインカテゴリー表示 -->
@@ -35,16 +35,16 @@
     <span class="error_message">{{ $message }}</span><br>
     @endforeach
     @endif
-    <label>タイトル</label>
+    <label>Title</label>
     <input type="text" name="title" value="{{ old('title') }}" class="form-control">
     @if($errors->has('post'))
     @foreach($errors->get('post') as $message)
     <span class="error_message">{{ $message }}</span><br>
     @endforeach
     @endif
-    <label>投稿内容</label>
+    <label>Post</label>
     <textarea name="post" class="form-control">{{ old('post') }}</textarea>
-    <input type="submit" value="投稿" class="btn btn-primary">
+    <input type="submit" value="Post" class="btn btn-primary">
   </form>
 </div>
 

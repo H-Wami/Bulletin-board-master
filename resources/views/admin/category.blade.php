@@ -17,9 +17,9 @@
       <span class="error_message">{{ $message }}</span><br>
       @endforeach
       @endif
-      <label>新規メインカテゴリー</label>
+      <label>New Main Category</label>
       <input type="text" name="main_category" value="{{ old('main_category') }}" class="form-control">
-      <input type="submit" value="登録" class="btn btn-danger">
+      <input type="submit" value="Register" class="btn btn-danger">
     </form>
   </div>
 
@@ -33,7 +33,7 @@
       <span class="error_message">{{ $message }}</span><br>
       @endforeach
       @endif
-      <label>メインカテゴリー</label>
+      <label>Main Category</label>
       <select name="post_main_category_id" class="form-select">
         <option value="none"></option>
         @foreach($main_categories as $main_category)
@@ -46,9 +46,9 @@
       <span class="error_message">{{ $message }}</span><br>
       @endforeach
       @endif
-      <label>新規サブカテゴリー</label>
+      <label>New Sub Category</label>
       <input type="text" name="sub_category" value="{{ old('sub_category') }}" class="form-control">
-      <input type="submit" value="登録" class="btn btn-danger">
+      <input type="submit" value="Register" class="btn btn-danger">
     </form>
   </div>
 </div>

@@ -187,7 +187,7 @@ li {
   justify-content: space-between;
 }
 
-/* 投稿一覧ページ */
+/* 投稿一覧ページ・投稿詳細ページ */
 .post_list{
   width: 70%;
 }
@@ -229,7 +229,8 @@ li {
   margin-bottom: 15px;
 }
 
-.post_head{
+.post_head,
+.comment_head{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -247,7 +248,8 @@ li {
   color: #0d6efd;
 }
 
-.post_foot {
+.post_foot,
+.comment_foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -306,7 +308,7 @@ li {
   margin-bottom: 7px;
 }
 
-/* 新規投稿ページ・投稿編集ページ */
+/* 新規投稿ページ・投稿編集ページ・コメント編集ページ */
 .common_container {
   width: 70%;
   position: relative;
@@ -325,6 +327,10 @@ li {
   margin-bottom: 7px;
 }
 
+.common_container label{
+  font-weight: bold;
+}
+
 .common_container label,
 .common_container select {
   margin-bottom: 7px;
@@ -333,4 +339,35 @@ li {
 .common_container a{
   width: 100%;
   margin: 8px 0 15px 0;
+}
+
+/* 投稿詳細ページ */
+.post_detail {
+  border: solid 1px #fff;
+  padding: 10px 20px 10px 18px;
+  margin-bottom: 15px;
+}
+
+.post_heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post_title {
+  font-size: 20px;
+  color: #0d6efd;
+}
+
+.comment_head_inner,
+.post_head_inner {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment_unit {
+  border-bottom: solid 1px #fff;
+  padding: 10px 20px 10px 18px;
+  margin-bottom: 15px;
 }

@@ -16,7 +16,7 @@
     <span class="error_message">{{ $message }}</span><br>
     @endforeach
     @endif
-    <label>サブカテゴリー</label>
+    <label>Sub Category</label>
     <select class="form-select" name="post_sub_category_id" value="{{ $post->post_sub_category_id }}">
       <option value="none"></option>
       <!-- メインカテゴリー表示 -->
@@ -40,21 +40,21 @@
     <span class="error_message">{{ $message }}</span><br>
     @endforeach
     @endif
-    <label>タイトル</label>
+    <label>Title</label>
     <input class="form-control" type="text" name="title" value="{{ $post->title }}">
     @if($errors->has('post'))
     @foreach($errors->get('post') as $message)
     <span class="error_message">{{ $message }}</span><br>
     @endforeach
     @endif
-    <label>投稿内容</label>
+    <label>Post</label>
     <textarea class="form-control" name="post" value="{{ $post->post }}">{{ $post->post }}</textarea>
     <input type="hidden" name="post_id" value="{{ $post->id }}">
-    <input type="submit" value="編集" class="btn btn-primary">
+    <input type="submit" value="Edit" class="btn btn-primary">
   </form>
   <!-- 削除ボタン -->
   <div>
-    <a href="{{ route('postDelete',['id' => $post->id]) }}" onclick="return confirm('投稿を削除してもよろしいでしょうか？')" class="btn btn-danger">削除</a>
+    <a href="{{ route('postDelete',['id' => $post->id]) }}" onclick="return confirm('投稿を削除してもよろしいでしょうか？')" class="btn btn-danger">Delete</a>
   </div>
 </div>
 
